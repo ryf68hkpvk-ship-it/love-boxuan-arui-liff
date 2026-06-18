@@ -4,6 +4,14 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbw511Q6AhWsWa2sI1uMpNkw
 
 let userId = '';
 
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
 async function init() {
   try {
     await liff.init({
@@ -17,8 +25,6 @@ async function init() {
 
     const profile = await liff.getProfile();
     userId = profile.userId;
-
-    console.log('LINE UserID:', userId);
 
   } catch (err) {
     alert('LIFF 初始化失敗：' + err.message);
@@ -55,6 +61,8 @@ async function createReminder() {
   document.getElementById('task').value = '';
   document.getElementById('date').value = '';
   document.getElementById('time').value = '';
+
+  showPage('homePage');
 }
 
 init();
