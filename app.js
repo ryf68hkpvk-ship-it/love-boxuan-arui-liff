@@ -1,24 +1,60 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbycW_xKCct94r2mQFw5rz4A_Isi209uY_m6WLsxTQyOKXEGT_X_dR0KJPHpKKp7QzSZ/exec';
+const LIFF_ID = '2010440942-oo64INdp';
 
-async function createReminder(){
+const API_URL = 'https://script.google.com/macros/s/AKfycbw511Q6AhWsWa2sI1uMpNkwvmyAsN7PB3CoQDoJlqmv7mO5OYP6YWplfNTwnxvwOsPg/exec';
 
-  const task = document.getElementById('task').value;
+let userId = '';
+
+async function init() {
+  try {
+    await liff.init({
+      liffId: LIFF_ID
+    });
+
+    if (!liff.isLoggedIn()) {
+      liff.login();
+      return;
+    }
+
+    const profile = await liff.getProfile();
+    userId = profile.userId;
+
+    console.log('LINE UserID:', userId);
+
+  } catch (err) {
+    alert('LIFF 初始化失敗：' + err.message);
+  }
+}
+
+async function createReminder() {
+  const task = document.getElementById('task').value.trim();
   const date = document.getElementById('date').value;
   const time = document.getElementById('time').value;
 
-  const remindTime = `${date} ${time}`;
+  if (!task || !date || !time) {
+    alert('請填寫事項、日期、時間');
+    return;
+  }
 
-  const res = await fetch(API_URL,{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json'
-    },
-    body:JSON.stringify({
-      action:'addReminder',
-      task,
-      remindTime
+  if (!userId) {
+    alert('尚未取得 LINE 使用者資料，請重新開啟頁面');
+    return;
+  }
+
+  await fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify({
+      action: 'addReminder',
+      userId: userId,
+      task: task,
+      remindTime: date + ' ' + time
     })
   });
 
   alert('❤️ 提醒已建立');
+
+  document.getElementById('task').value = '';
+  document.getElementById('date').value = '';
+  document.getElementById('time').value = '';
 }
+
+init();
