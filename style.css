@@ -1,0 +1,54 @@
+body{
+  margin:0;
+  background:#fff5f8;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:20px;
+}
+
+.hero{
+  text-align:center;
+  padding:30px 20px;
+}
+
+.hero h1{
+  color:#ff4f87;
+  margin:0;
+}
+
+.hero p{
+  color:#888;
+}
+
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+input,
+textarea{
+  width:100%;
+  box-sizing:border-box;
+  padding:12px;
+  margin-top:10px;
+  margin-bottom:10px;
+  border:1px solid #eee;
+  border-radius:12px;
+}
+
+button{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  background:#ff4f87;
+  color:white;
+  padding:14px;
+  font-size:16px;
+}
