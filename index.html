@@ -1,81 +1,147 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>❤️ 永遠愛柏萱的阿睿</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>永遠愛柏萱的阿睿</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
-
 <body>
 
-<div class="container">
+<div class="app">
 
-  <div class="hero">
-    <h1>❤️ 永遠愛柏萱的阿睿</h1>
-    <p>你的生活防呆小秘書</p>
-  </div>
+  <section class="page active" id="homePage">
+    <div class="hero">
+      <img src="images/hero.jpg" />
+      <div class="heroText">
+        <h1>永遠愛柏萱的阿睿 ❤️</h1>
+        <p>用心記得每一件重要的事</p>
+      </div>
+    </div>
 
-  <div class="card">
+    <div class="card pink">
+      <div class="cardTitle">❤️ 柏萱守護</div>
+      <div class="listItem">📍 出門前報備 <span>待完成</span></div>
+      <div class="listItem">🏠 到家說一聲 <span>待完成</span></div>
+      <div class="listItem">🌙 睡前說晚安 <span class="done">已完成</span></div>
+      <button onclick="showPage('reportPage')">🚗 我要報備出門</button>
+    </div>
 
+    <div class="card blue">
+      <div class="cardTitle">💼 睿哥工作助手</div>
+      <div class="grid">
+        <div>👥<b>客戶拜訪</b><small>今日 3 家</small></div>
+        <div>📦<b>補貨提醒</b><small>待處理 2 件</small></div>
+        <div>📋<b>訂單管理</b><small>待確認 5 筆</small></div>
+        <div>📊<b>業績總覽</b><small>今日 $28,500</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="calendarPage">
+    <h2>📅 今日行程</h2>
+    <div class="timeline">
+      <div><time>10:00</time><p>客戶拜訪：建國超市</p></div>
+      <div><time>14:00</time><p>補貨：大遠百攤位</p></div>
+      <div><time>19:00</time><p>陪柏萱吃飯 ❤️</p></div>
+    </div>
+  </section>
+
+  <section class="page" id="addPage">
     <h2>➕ 新增提醒</h2>
 
-    <input
-      type="text"
-      id="task"
-      placeholder="例如：陪柏萱吃飯">
+    <div class="tabs">
+      <button class="active">行程提醒</button>
+      <button>柏萱交代事項</button>
+    </div>
 
-    <input
-      type="date"
-      id="date">
+    <div class="formCard">
+      <label>事項</label>
+      <input id="task" placeholder="例如：陪柏萱去大遠百" />
 
-    <input
-      type="time"
-      id="time">
+      <label>日期</label>
+      <input id="date" type="date" />
 
-    <button onclick="createReminder()">
-      建立提醒
-    </button>
+      <label>時間</label>
+      <input id="time" type="time" />
 
-  </div>
+      <label>備註</label>
+      <textarea placeholder="可填寫備註..."></textarea>
 
-  <div class="card">
+      <button onclick="createReminder()">建立提醒</button>
+    </div>
+  </section>
 
-    <h2>❤️ 柏萱待辦</h2>
+  <section class="page" id="todoPage">
+    <h2>✅ 柏萱交代事項 ❤️</h2>
+    <div class="todoCard">
+      <label><input type="checkbox" /> 買衛生紙 <span>重要</span></label>
+      <label><input type="checkbox" /> 訂餐廳</label>
+      <label><input type="checkbox" /> 回娘家</label>
+      <label><input type="checkbox" /> 買蛋糕 <span>重要</span></label>
+    </div>
 
-    <textarea
-      id="todo"
-      rows="5"
-      placeholder="記得買衛生紙、垃圾袋..."></textarea>
+    <div class="quote">
+      ❤️ 柏萱說：<br />
+      記得把每一件事都放在心上喔 ❤️
+    </div>
+  </section>
 
-    <button>
-      儲存待辦
-    </button>
+  <section class="page" id="profilePage">
+    <h2>👤 我的</h2>
+    <div class="profileCard">
+      <img src="images/profile.jpg" />
+      <div>
+        <h3>永遠愛柏萱的阿睿 ❤️</h3>
+        <p>用心記得每一件重要的事</p>
+      </div>
+    </div>
 
-  </div>
+    <div class="settingList">
+      <div>📍 安全區域設定 <span>›</span></div>
+      <div>🔔 提醒設定 <span>›</span></div>
+      <div>📅 Google 日曆同步 <b>已連線</b></div>
+      <div>💬 LINE 通知設定 <span>›</span></div>
+      <div>☁️ 資料備份 <span>›</span></div>
+      <div>❓ 使用教學 <span>›</span></div>
+    </div>
 
-  <div class="card">
+    <div class="memory">
+      <h3>我們的回憶 ❤️</h3>
+      <div>
+        <img src="images/memory1.jpg" />
+        <img src="images/memory2.jpg" />
+      </div>
+    </div>
+  </section>
 
+  <section class="page" id="reportPage">
     <h2>🚗 出門報備</h2>
+    <div class="formCard">
+      <label>我要去哪裡？</label>
+      <input placeholder="例如：台中大遠百" />
 
-    <input
-      type="text"
-      id="destination"
-      placeholder="目的地">
+      <label>預計幾點回來？</label>
+      <input type="time" />
 
-    <button>
-      立即報備
-    </button>
+      <label>備註</label>
+      <textarea placeholder="例如：先去補貨，晚點陪妳吃飯 ❤️"></textarea>
 
-  </div>
+      <button>送出報備</button>
+    </div>
+  </section>
 
 </div>
 
-<script src="app.js"></script>
+<nav class="bottomNav">
+  <button onclick="showPage('homePage')">🏠<span>首頁</span></button>
+  <button onclick="showPage('calendarPage')">📅<span>行程</span></button>
+  <button class="plus" onclick="showPage('addPage')">＋</button>
+  <button onclick="showPage('todoPage')">✅<span>待辦</span></button>
+  <button onclick="showPage('profilePage')">👤<span>我的</span></button>
+</nav>
 
+<script src="app.js"></script>
 </body>
 </html>
