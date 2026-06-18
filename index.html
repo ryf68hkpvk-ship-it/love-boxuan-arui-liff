@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>❤️ 永遠愛柏萱的阿睿</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>❤️ 永遠愛柏萱的阿睿</h1>
+    <p>你的生活防呆小秘書</p>
+  </div>
+
+  <div class="card">
+
+    <h2>➕ 新增提醒</h2>
+
+    <input
+      type="text"
+      id="task"
+      placeholder="例如：陪柏萱吃飯">
+
+    <input
+      type="date"
+      id="date">
+
+    <input
+      type="time"
+      id="time">
+
+    <button onclick="createReminder()">
+      建立提醒
+    </button>
+
+  </div>
+
+  <div class="card">
+
+    <h2>❤️ 柏萱待辦</h2>
+
+    <textarea
+      id="todo"
+      rows="5"
+      placeholder="記得買衛生紙、垃圾袋..."></textarea>
+
+    <button>
+      儲存待辦
+    </button>
+
+  </div>
+
+  <div class="card">
+
+    <h2>🚗 出門報備</h2>
+
+    <input
+      type="text"
+      id="destination"
+      placeholder="目的地">
+
+    <button>
+      立即報備
+    </button>
+
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
