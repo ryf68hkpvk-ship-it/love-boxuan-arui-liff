@@ -358,3 +358,37 @@ textarea{
   line-height:54px;
   padding:0;
 }
+
+.emptyText{
+  color:#999;
+  font-size:14px;
+  padding:10px 0;
+  line-height:1.7;
+}
+
+.smallText{
+  color:#888;
+  font-size:14px;
+  line-height:1.7;
+  margin-top:6px;
+}
+
+.miniInfo{
+  background:white;
+  border-radius:14px;
+  padding:12px;
+  margin-top:10px;
+  color:#555;
+  font-size:14px;
+  line-height:1.7;
+}
+
+select{
+  width:100%;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:13px;
+  font-size:16px;
+  background:white;
+  color:#222;
+}
