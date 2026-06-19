@@ -16,48 +16,40 @@
       <img src="image/hero.jpg" />
       <div class="heroText">
         <h1>永遠愛柏萱的軒睿 ❤️</h1>
-        <p>用心記得每一件重要的事</p>
+        <p>記得重要行程，也記得出門前說一聲</p>
       </div>
     </div>
 
     <div class="card pink">
-      <div class="cardTitle">❤️ 柏萱守護</div>
-      <div class="listItem">📍 出門前報備 <span>待完成</span></div>
-      <div class="listItem">🏠 到家說一聲 <span>待完成</span></div>
-      <div class="listItem">🌙 睡前說晚安 <span class="done">已完成</span></div>
+      <div class="cardTitle">❤️ 今日出門狀態</div>
+      <div id="reportStatus">
+        <div class="emptyText">載入中...</div>
+      </div>
       <button onclick="showPage('reportPage')">🚗 我要報備出門</button>
     </div>
 
-    <div class="card blue">
-      <div class="cardTitle">💼 睿哥工作助手</div>
-      <div class="grid">
-        <div>👥<b>客戶拜訪</b><small>今日 3 家</small></div>
-        <div>📦<b>補貨提醒</b><small>待處理 2 件</small></div>
-        <div>📋<b>訂單管理</b><small>待確認 5 筆</small></div>
-        <div>📊<b>業績總覽</b><small>今日 $28,500</small></div>
+    <div class="card">
+      <div class="cardTitle">📅 今日行程</div>
+      <div id="todayReminders">
+        <div class="emptyText">載入中...</div>
       </div>
+      <button onclick="showPage('calendarPage')">查看全部行程</button>
+    </div>
+
+    <div class="card">
+      <div class="cardTitle">✅ 柏萱交代事項</div>
+      <div id="todoList">
+        <div class="emptyText">載入中...</div>
+      </div>
+      <button onclick="showPage('todoPage')">查看全部待辦</button>
     </div>
   </section>
 
   <section class="page" id="calendarPage">
-    <h2>📅 今日行程</h2>
-    <div class="timeline">
-      <div><time>10:00</time><p>客戶拜訪：建國超市</p></div>
-      <div><time>14:00</time><p>補貨：大遠百攤位</p></div>
-      <div><time>19:00</time><p>陪柏萱吃飯 ❤️</p></div>
-    </div>
-  </section>
-
-  <section class="page" id="addPage">
-    <h2>➕ 新增提醒</h2>
-
-    <div class="tabs">
-      <button class="active">行程提醒</button>
-      <button>柏萱交代事項</button>
-    </div>
+    <h2>📅 行程提醒</h2>
 
     <div class="formCard">
-      <label>事項</label>
+      <label>新增行程事項</label>
       <input id="task" placeholder="例如：陪柏萱去大遠百" />
 
       <label>日期</label>
@@ -66,25 +58,61 @@
       <label>時間</label>
       <input id="time" type="time" />
 
-      <label>備註</label>
-      <textarea placeholder="可填寫備註..."></textarea>
-
       <button onclick="createReminder()">建立提醒</button>
+    </div>
+
+    <div class="card">
+      <div class="cardTitle">今日行程</div>
+      <div id="todayRemindersFull">
+        <div class="emptyText">請回首頁刷新查看今日行程</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="addPage">
+    <h2>➕ 新增</h2>
+
+    <div class="card pink">
+      <div class="cardTitle">📅 新增行程提醒</div>
+      <p class="smallText">建立後會寫入提醒事項，時間到由 LINE Bot 推播。</p>
+      <button onclick="showPage('calendarPage')">新增行程</button>
+    </div>
+
+    <div class="card">
+      <div class="cardTitle">✅ 新增柏萱交代事項</div>
+      <p class="smallText">適合不一定有時間，但需要記得完成的事情。</p>
+      <button onclick="showPage('todoPage')">新增待辦</button>
+    </div>
+
+    <div class="card">
+      <div class="cardTitle">🚗 出門報備</div>
+      <p class="smallText">早上出門前，記錄今天要去哪裡。</p>
+      <button onclick="showPage('reportPage')">我要報備出門</button>
     </div>
   </section>
 
   <section class="page" id="todoPage">
-    <h2>✅ 柏萱交代事項 ❤️</h2>
-    <div class="todoCard">
-      <label><input type="checkbox" /> 買衛生紙 <span>重要</span></label>
-      <label><input type="checkbox" /> 訂餐廳</label>
-      <label><input type="checkbox" /> 回娘家</label>
-      <label><input type="checkbox" /> 買蛋糕 <span>重要</span></label>
+    <h2>✅ 柏萱交代事項</h2>
+
+    <div class="formCard">
+      <label>新增交代事項</label>
+      <input id="todoTask" placeholder="例如：買衛生紙" />
+
+      <label>重要程度</label>
+      <select id="todoLevel">
+        <option value="一般">一般</option>
+        <option value="重要">重要</option>
+        <option value="很重要">很重要</option>
+      </select>
+
+      <button onclick="createTodo()">新增待辦</button>
     </div>
 
-    <div class="quote">
-      ❤️ 柏萱說：<br />
-      記得把每一件事都放在心上喔 ❤️
+    <div class="card">
+      <div class="cardTitle">目前未完成</div>
+      <div id="todoListFull">
+        <div class="emptyText">回首頁可查看最新待辦</div>
+      </div>
     </div>
   </section>
 
@@ -94,17 +122,16 @@
       <img src="image/profile.jpg" />
       <div>
         <h3>永遠愛柏萱的軒睿 ❤️</h3>
-        <p>用心記得每一件重要的事</p>
+        <p>目前已連線 LINE Bot 與 Google Sheet</p>
       </div>
     </div>
 
     <div class="settingList">
-      <div>📍 安全區域設定 <span>›</span></div>
-      <div>🔔 提醒設定 <span>›</span></div>
-      <div>📅 Google 日曆同步 <b>已連線</b></div>
-      <div>💬 LINE 通知設定 <span>›</span></div>
-      <div>☁️ 資料備份 <span>›</span></div>
-      <div>❓ 使用教學 <span>›</span></div>
+      <div>💬 LINE 通知 <b>已連線</b></div>
+      <div>📄 Google Sheet 資料庫 <b>已連線</b></div>
+      <div>📅 Google 日曆同步 <span>尚未啟用</span></div>
+      <div>📍 安全區域提醒 <span>下一版</span></div>
+      <div>☁️ 資料備份 <span>Google Sheet</span></div>
     </div>
 
     <div class="memory">
@@ -119,16 +146,16 @@
   <section class="page" id="reportPage">
     <h2>🚗 出門報備</h2>
     <div class="formCard">
-      <label>我要去哪裡？</label>
-      <input placeholder="例如：台中大遠百" />
+      <label>今天我要去哪裡？</label>
+      <input id="destination" placeholder="例如：台中大遠百" />
 
       <label>預計幾點回來？</label>
-      <input type="time" />
+      <input id="returnTime" type="time" />
 
       <label>備註</label>
-      <textarea placeholder="例如：先去補貨，晚點陪妳吃飯 ❤️"></textarea>
+      <textarea id="reportNote" placeholder="例如：先去補貨，晚點回來 ❤️"></textarea>
 
-      <button>送出報備</button>
+      <button onclick="createReport()">送出報備</button>
     </div>
   </section>
 
