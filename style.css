@@ -81,10 +81,8 @@ h2{
 
 .card,
 .formCard,
-.todoCard,
 .profileCard,
 .settingList,
-.quote,
 .memory{
   background:white;
   border-radius:22px;
@@ -95,10 +93,6 @@ h2{
 
 .pink{
   background:#fff1f5;
-}
-
-.blue{
-  background:#f4f8ff;
 }
 
 .cardTitle{
@@ -113,8 +107,9 @@ h2{
   justify-content:space-between;
   align-items:center;
   font-size:15px;
-  padding:9px 0;
+  padding:10px 0;
   border-bottom:1px solid rgba(0,0,0,.05);
+  gap:10px;
 }
 
 .listItem span{
@@ -123,6 +118,7 @@ h2{
   color:#f59f00;
   padding:4px 8px;
   border-radius:99px;
+  white-space:nowrap;
 }
 
 .listItem .done{
@@ -142,73 +138,6 @@ button{
   font-weight:800;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-
-.grid div{
-  background:white;
-  border-radius:16px;
-  padding:14px 8px;
-  text-align:center;
-  font-size:22px;
-}
-
-.grid b{
-  display:block;
-  font-size:14px;
-  margin-top:6px;
-}
-
-.grid small{
-  display:block;
-  font-size:12px;
-  color:#888;
-  margin-top:4px;
-}
-
-.timeline div{
-  background:white;
-  border-radius:18px;
-  padding:14px;
-  margin-bottom:12px;
-  box-shadow:0 6px 18px rgba(0,0,0,.06);
-}
-
-.timeline time{
-  display:block;
-  color:#ff4f87;
-  font-weight:800;
-  margin-bottom:6px;
-}
-
-.timeline p{
-  font-size:15px;
-}
-
-.tabs{
-  display:flex;
-  background:#f3f3f3;
-  border-radius:18px;
-  padding:4px;
-  margin-bottom:16px;
-}
-
-.tabs button{
-  margin:0;
-  border-radius:14px;
-  background:transparent;
-  color:#777;
-  font-size:15px;
-}
-
-.tabs button.active{
-  background:#ffdce7;
-  color:#ff4f87;
-}
-
 label{
   display:block;
   margin:12px 0 6px;
@@ -217,7 +146,8 @@ label{
 }
 
 input,
-textarea{
+textarea,
+select{
   width:100%;
   border:1px solid #eee;
   border-radius:14px;
@@ -238,34 +168,126 @@ textarea{
   resize:none;
 }
 
-.todoCard label{
+.emptyText{
+  color:#999;
+  font-size:14px;
+  padding:10px 0;
+  line-height:1.7;
+}
+
+.smallText{
+  color:#888;
+  font-size:14px;
+  line-height:1.7;
+  margin-top:6px;
+}
+
+.miniInfo{
+  background:white;
+  border-radius:14px;
+  padding:12px;
+  margin-top:10px;
+  color:#555;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.dateSwitcher{
   display:flex;
-  align-items:center;
+  gap:8px;
+  overflow-x:auto;
+  padding:4px 0 14px;
+}
+
+.dateSwitcher button{
+  min-width:72px;
+  margin:0;
+  padding:10px 8px;
+  border-radius:14px;
+  background:white;
+  color:#777;
+  box-shadow:0 4px 14px rgba(0,0,0,.05);
+}
+
+.dateSwitcher button.active{
+  background:#ff4f87;
+  color:white;
+}
+
+.taskItem{
+  display:flex;
+  align-items:flex-start;
   gap:10px;
   padding:12px 0;
   border-bottom:1px solid #f1f1f1;
-  font-size:16px;
-  font-weight:500;
 }
 
-.todoCard input{
-  width:22px;
-  height:22px;
-}
-
-.todoCard span{
-  margin-left:auto;
-  background:#ffe0e9;
+.taskCheck{
+  width:28px;
+  height:28px;
+  min-width:28px;
+  border-radius:50%;
+  border:2px solid #ff8fb3;
+  background:white;
   color:#ff4f87;
+  font-weight:900;
+  flex-shrink:0;
+  padding:0;
+  margin:0;
+}
+
+.taskBody{
+  flex:1;
+}
+
+.taskTitle{
+  font-size:15px;
+  font-weight:700;
+  line-height:1.5;
+}
+
+.taskMeta{
+  margin-top:4px;
+  font-size:12px;
+  color:#999;
+}
+
+.taskTag{
+  display:inline-block;
+  margin-top:6px;
   padding:4px 8px;
   border-radius:99px;
+  background:#fff1f5;
+  color:#ff4f87;
   font-size:12px;
 }
 
-.quote{
-  background:#fff1f5;
-  color:#d93668;
-  line-height:1.8;
+.completedBox{
+  margin-top:12px;
+  background:#fafafa;
+  border-radius:18px;
+  padding:12px;
+}
+
+.completedTitle{
+  color:#777;
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.inlineCheck{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  font-size:14px;
+  color:#555;
+}
+
+.inlineCheck input{
+  width:20px;
+  height:20px;
 }
 
 .profileCard{
@@ -301,6 +323,11 @@ textarea{
 
 .settingList b{
   color:#18a058;
+  font-size:13px;
+}
+
+.settingList span{
+  color:#888;
   font-size:13px;
 }
 
@@ -357,38 +384,4 @@ textarea{
   font-size:32px;
   line-height:54px;
   padding:0;
-}
-
-.emptyText{
-  color:#999;
-  font-size:14px;
-  padding:10px 0;
-  line-height:1.7;
-}
-
-.smallText{
-  color:#888;
-  font-size:14px;
-  line-height:1.7;
-  margin-top:6px;
-}
-
-.miniInfo{
-  background:white;
-  border-radius:14px;
-  padding:12px;
-  margin-top:10px;
-  color:#555;
-  font-size:14px;
-  line-height:1.7;
-}
-
-select{
-  width:100%;
-  border:1px solid #eee;
-  border-radius:14px;
-  padding:13px;
-  font-size:16px;
-  background:white;
-  color:#222;
 }
