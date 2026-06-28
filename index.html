@@ -7,108 +7,151 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
-<body>
 
+<body>
 <div class="app">
 
+  <!-- 首頁 -->
   <section class="page active" id="homePage">
     <div class="hero">
       <img src="images/hero.jpg" />
       <div class="heroText">
         <h1>永遠愛柏萱的軒睿 ❤️</h1>
-        <p>記得重要行程，也記得出門前說一聲</p>
+        <p>今天的行程、任務與出門狀態</p>
       </div>
     </div>
 
     <div class="card pink">
-      <div class="cardTitle">❤️ 今日出門狀態</div>
+      <div class="cardHeader">
+        <div class="cardTitle">❤️ 今日出門狀態</div>
+      </div>
+
       <div id="reportStatus">
         <div class="emptyText">載入中...</div>
       </div>
+
       <button onclick="showPage('reportPage')">🚗 我要報備出門</button>
     </div>
 
     <div class="card">
-      <div class="cardTitle">📅 今日行程</div>
-      <div id="todayReminders">
+      <div class="cardHeader">
+        <div class="cardTitle">📅 今日行程</div>
+        <span id="homeScheduleCount" class="countBadge">0</span>
+      </div>
+
+      <div id="todaySchedules">
         <div class="emptyText">載入中...</div>
       </div>
+
       <button onclick="showPage('calendarPage')">查看全部行程</button>
     </div>
 
     <div class="card">
-      <div class="cardTitle">❤️ 柏萱交代</div>
+      <div class="cardHeader">
+        <div class="cardTitle">❤️ 柏萱交代</div>
+        <span id="homeBoxuanCount" class="countBadge">0</span>
+      </div>
+
       <div id="homeBoxuanTasks">
         <div class="emptyText">載入中...</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="cardTitle">📝 軒睿筆記</div>
+      <div class="cardHeader">
+        <div class="cardTitle">📝 軒睿筆記</div>
+        <span id="homeXuanruiCount" class="countBadge">0</span>
+      </div>
+
       <div id="homeXuanruiTasks">
         <div class="emptyText">載入中...</div>
       </div>
+
       <button onclick="showPage('todoPage')">查看全部任務</button>
-    </div>
-  </section>
-
-  <section class="page" id="calendarPage">
-    <h2>📅 行程提醒</h2>
-
-    <div class="formCard">
-      <label>新增行程事項</label>
-      <input id="task" placeholder="例如：陪柏萱去大遠百" />
-
-      <label>日期</label>
-      <input id="date" type="date" />
-
-      <label>時間</label>
-      <input id="time" type="time" />
-
-      <label class="inlineCheck">
-        <input id="addReminderToTask" type="checkbox" />
-        同時加入當日任務
-      </label>
-
-      <button onclick="createReminder()">建立提醒</button>
     </div>
 
     <div class="card">
-      <div class="cardTitle">今日行程</div>
-      <div id="todayRemindersFull">
+      <div class="cardTitle">📊 今日完成狀態</div>
+      <div id="todayProgress">
         <div class="emptyText">載入中...</div>
       </div>
     </div>
   </section>
 
-  <section class="page" id="addPage">
-    <h2>➕ 新增</h2>
+  <!-- 行程頁 -->
+  <section class="page" id="calendarPage">
+    <h2>📅 行程</h2>
 
-    <div class="card pink">
-      <div class="cardTitle">📅 新增行程提醒</div>
-      <p class="smallText">建立指定時間的提醒，時間到 LINE Bot 會推播。</p>
-      <button onclick="showPage('calendarPage')">新增行程</button>
+    <div class="dateSwitcher" id="scheduleDateSwitcher"></div>
+
+    <div class="formCard">
+      <label>新增行程事項</label>
+      <input id="scheduleTitle" placeholder="例如：陪柏萱吃飯" />
+
+      <label>日期</label>
+      <input id="scheduleDate" type="date" />
+
+      <label>時間</label>
+      <input id="scheduleTime" type="time" />
+
+      <label>備註</label>
+      <textarea id="scheduleNote" placeholder="可填寫地點、備註..."></textarea>
+
+      <label class="inlineCheck">
+        <input id="scheduleAddToTask" type="checkbox" />
+        同時加入當日任務
+      </label>
+
+      <button onclick="createSchedule()">建立行程</button>
     </div>
 
     <div class="card">
-      <div class="cardTitle">❤️ 新增柏萱交代</div>
-      <p class="smallText">適合需要記得完成，但不一定有固定時間的事情。</p>
-      <button onclick="showPage('todoPage'); setTodoCategory('柏萱交代')">新增柏萱交代</button>
-    </div>
+      <div class="cardHeader">
+        <div class="cardTitle">當日行程</div>
+        <span id="schedulePageCount" class="countBadge">0</span>
+      </div>
 
-    <div class="card">
-      <div class="cardTitle">📝 新增軒睿筆記</div>
-      <p class="smallText">自己的任務、想法、工作事項，都可以放這裡。</p>
-      <button onclick="showPage('todoPage'); setTodoCategory('軒睿筆記')">新增軒睿筆記</button>
-    </div>
-
-    <div class="card">
-      <div class="cardTitle">🚗 出門報備</div>
-      <p class="smallText">早上出門前，記錄今天要去哪裡。</p>
-      <button onclick="showPage('reportPage')">我要報備出門</button>
+      <div id="scheduleList">
+        <div class="emptyText">載入中...</div>
+      </div>
     </div>
   </section>
 
+  <!-- 新增頁 -->
+  <section class="page" id="addPage">
+    <h2>➕ 新增</h2>
+
+    <div class="quickGrid">
+      <button onclick="showPage('calendarPage')">
+        📅<br />
+        新增行程
+      </button>
+
+      <button onclick="showPage('todoPage'); setTodoCategory('柏萱交代')">
+        ❤️<br />
+        柏萱交代
+      </button>
+
+      <button onclick="showPage('todoPage'); setTodoCategory('軒睿筆記')">
+        📝<br />
+        軒睿筆記
+      </button>
+
+      <button onclick="showPage('reportPage')">
+        🚗<br />
+        出門報備
+      </button>
+    </div>
+
+    <div class="card pink">
+      <div class="cardTitle">使用方式</div>
+      <p class="smallText">
+        有明確時間的事情放「行程」；沒有固定時間但需要完成的事情放「任務」。
+      </p>
+    </div>
+  </section>
+
+  <!-- 任務頁 -->
   <section class="page" id="todoPage">
     <h2>✅ 任務</h2>
 
@@ -134,18 +177,26 @@
         <option value="很重要">很重要</option>
       </select>
 
-      <button onclick="createTodo()">新增任務</button>
+      <button onclick="createTask()">新增任務</button>
     </div>
 
     <div class="card">
-      <div class="cardTitle">❤️ 柏萱交代</div>
+      <div class="cardHeader">
+        <div class="cardTitle">❤️ 柏萱交代</div>
+        <span id="boxuanTaskCount" class="countBadge">0</span>
+      </div>
+
       <div id="boxuanTaskList">
         <div class="emptyText">載入中...</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="cardTitle">📝 軒睿筆記</div>
+      <div class="cardHeader">
+        <div class="cardTitle">📝 軒睿筆記</div>
+        <span id="xuanruiTaskCount" class="countBadge">0</span>
+      </div>
+
       <div id="xuanruiTaskList">
         <div class="emptyText">載入中...</div>
       </div>
@@ -159,6 +210,7 @@
     </div>
   </section>
 
+  <!-- 我的頁 -->
   <section class="page" id="profilePage">
     <h2>👤 我的</h2>
 
@@ -166,7 +218,7 @@
       <img src="images/profile.jpg" />
       <div>
         <h3>永遠愛柏萱的軒睿 ❤️</h3>
-        <p>目前已連線 LINE Bot 與 Google Sheet</p>
+        <p>LINE Bot + Google Sheet 已連線</p>
       </div>
     </div>
 
@@ -175,7 +227,7 @@
       <div>📄 Google Sheet 資料庫 <b>已連線</b></div>
       <div>📅 Google 日曆同步 <span>尚未啟用</span></div>
       <div>📍 安全區域提醒 <span>下一版</span></div>
-      <div>☁️ 資料備份 <span>Google Sheet</span></div>
+      <div>🧩 系統版本 <span>v3.0</span></div>
     </div>
 
     <div class="memory">
@@ -187,6 +239,7 @@
     </div>
   </section>
 
+  <!-- 出門報備 -->
   <section class="page" id="reportPage">
     <h2>🚗 出門報備</h2>
 
