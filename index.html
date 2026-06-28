@@ -37,11 +37,18 @@
     </div>
 
     <div class="card">
-      <div class="cardTitle">✅ 柏萱交代事項</div>
-      <div id="todoList">
+      <div class="cardTitle">❤️ 柏萱交代</div>
+      <div id="homeBoxuanTasks">
         <div class="emptyText">載入中...</div>
       </div>
-      <button onclick="showPage('todoPage')">查看全部待辦</button>
+    </div>
+
+    <div class="card">
+      <div class="cardTitle">📝 軒睿筆記</div>
+      <div id="homeXuanruiTasks">
+        <div class="emptyText">載入中...</div>
+      </div>
+      <button onclick="showPage('todoPage')">查看全部任務</button>
     </div>
   </section>
 
@@ -58,13 +65,18 @@
       <label>時間</label>
       <input id="time" type="time" />
 
+      <label class="inlineCheck">
+        <input id="addReminderToTask" type="checkbox" />
+        同時加入當日任務
+      </label>
+
       <button onclick="createReminder()">建立提醒</button>
     </div>
 
     <div class="card">
       <div class="cardTitle">今日行程</div>
       <div id="todayRemindersFull">
-        <div class="emptyText">請回首頁刷新查看今日行程</div>
+        <div class="emptyText">載入中...</div>
       </div>
     </div>
   </section>
@@ -74,14 +86,20 @@
 
     <div class="card pink">
       <div class="cardTitle">📅 新增行程提醒</div>
-      <p class="smallText">建立後會寫入提醒事項，時間到由 LINE Bot 推播。</p>
+      <p class="smallText">建立指定時間的提醒，時間到 LINE Bot 會推播。</p>
       <button onclick="showPage('calendarPage')">新增行程</button>
     </div>
 
     <div class="card">
-      <div class="cardTitle">✅ 新增柏萱交代事項</div>
-      <p class="smallText">適合不一定有時間，但需要記得完成的事情。</p>
-      <button onclick="showPage('todoPage')">新增待辦</button>
+      <div class="cardTitle">❤️ 新增柏萱交代</div>
+      <p class="smallText">適合需要記得完成，但不一定有固定時間的事情。</p>
+      <button onclick="showPage('todoPage'); setTodoCategory('柏萱交代')">新增柏萱交代</button>
+    </div>
+
+    <div class="card">
+      <div class="cardTitle">📝 新增軒睿筆記</div>
+      <p class="smallText">自己的任務、想法、工作事項，都可以放這裡。</p>
+      <button onclick="showPage('todoPage'); setTodoCategory('軒睿筆記')">新增軒睿筆記</button>
     </div>
 
     <div class="card">
@@ -92,11 +110,22 @@
   </section>
 
   <section class="page" id="todoPage">
-    <h2>✅ 柏萱交代事項</h2>
+    <h2>✅ 任務</h2>
+
+    <div class="dateSwitcher" id="taskDateSwitcher"></div>
 
     <div class="formCard">
-      <label>新增交代事項</label>
+      <label>任務內容</label>
       <input id="todoTask" placeholder="例如：買衛生紙" />
+
+      <label>日期</label>
+      <input id="todoDate" type="date" />
+
+      <label>分類</label>
+      <select id="todoCategory">
+        <option value="柏萱交代">❤️ 柏萱交代</option>
+        <option value="軒睿筆記">📝 軒睿筆記</option>
+      </select>
 
       <label>重要程度</label>
       <select id="todoLevel">
@@ -105,19 +134,34 @@
         <option value="很重要">很重要</option>
       </select>
 
-      <button onclick="createTodo()">新增待辦</button>
+      <button onclick="createTodo()">新增任務</button>
     </div>
 
     <div class="card">
-      <div class="cardTitle">目前未完成</div>
-      <div id="todoListFull">
-        <div class="emptyText">回首頁可查看最新待辦</div>
+      <div class="cardTitle">❤️ 柏萱交代</div>
+      <div id="boxuanTaskList">
+        <div class="emptyText">載入中...</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardTitle">📝 軒睿筆記</div>
+      <div id="xuanruiTaskList">
+        <div class="emptyText">載入中...</div>
+      </div>
+    </div>
+
+    <div class="completedBox">
+      <div class="completedTitle">✓ 已完成</div>
+      <div id="completedTaskList">
+        <div class="emptyText">載入中...</div>
       </div>
     </div>
   </section>
 
   <section class="page" id="profilePage">
     <h2>👤 我的</h2>
+
     <div class="profileCard">
       <img src="images/profile.jpg" />
       <div>
@@ -145,6 +189,7 @@
 
   <section class="page" id="reportPage">
     <h2>🚗 出門報備</h2>
+
     <div class="formCard">
       <label>今天我要去哪裡？</label>
       <input id="destination" placeholder="例如：台中大遠百" />
@@ -165,7 +210,7 @@
   <button onclick="showPage('homePage')">🏠<span>首頁</span></button>
   <button onclick="showPage('calendarPage')">📅<span>行程</span></button>
   <button class="plus" onclick="showPage('addPage')">＋</button>
-  <button onclick="showPage('todoPage')">✅<span>待辦</span></button>
+  <button onclick="showPage('todoPage')">✅<span>任務</span></button>
   <button onclick="showPage('profilePage')">👤<span>我的</span></button>
 </nav>
 
